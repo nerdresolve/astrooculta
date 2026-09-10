@@ -1,0 +1,104 @@
+name: astro-oculta
+
+services:
+  # ── Aplicação ────────────────────────────────────────────────
+  # Não publica porta no host: quem fala com o mundo é o Caddy. Em
+  # desenvolvimento isso vale igual — o acesso é sempre pela porta 80.
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+      # Vêm do `.env` de quem sobe. Ausentes, o site usa os exemplos do código.
+      args:
+        NEXT_PUBLIC_SOCIAL_HANDLE: ${NEXT_PUBLIC_SOCIAL_HANDLE:-}
+        NEXT_PUBLIC_INSTAGRAM: ${NEXT_PUBLIC_INSTAGRAM:-}
+        NEXT_PUBLIC_TIKTOK: ${NEXT_PUBLIC_TIKTOK:-}
+        NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP:-}
+        NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL:-}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      # O servidor do Next escuta aqui dentro; o Caddy encaminha para cá.
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    expose:
+      - "3000"
+    healthcheck:
+      # O Next standalone não traz curl nem wget: o teste usa o próprio node.
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    networks:
+      - astro
+
+  # ── Borda ────────────────────────────────────────────────────
+  # Caddy em vez de nginx por dois motivos práticos: HTTPS automático
+  # (ACME embutido, sem certbot nem cron de renovação) e um Caddyfile que
+  # cabe em 40 linhas onde o nginx.conf equivalente passaria de 100.
+  caddy:
+    image: caddy:2.11-alpine
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_started
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+      # HTTP/3. Sem isto o Caddy anuncia h3 e o cliente não consegue usar.
+      - "${HTTPS_PORT:-443}:443/udp"
+    environment:
+      # Em produção vira o domínio real; sem isso o Caddy serve em :80 local
+      # e não tenta emitir certificado — que é o que se quer na máquina.
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+      UPSTREAM: web:3000
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Os certificados emitidos vivem aqui. Perder este volume significa
+      # pedir tudo de novo ao Let's Encrypt, que tem limite semanal.
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - astro
+
+  # ── Túnel Cloudflare ─────────────────────────────────────────
+  # A conexão sai do container PARA a Cloudflare, então a máquina não precisa
+  # de IP público, nem de porta aberta na entrada, nem de certificado próprio —
+  # o TLS público termina na borda da Cloudflare.
+  #
+  # Fica sob perfil: `npm run up` não sobe túnel nenhum, e publicar é um
+  # comando explícito (`npm run publish`), nunca efeito colateral.
+  tunnel:
+    # Versão fixa, não `latest`: com `latest` um `docker compose pull` traz uma
+    # imagem diferente sem aviso, e uma mudança de comportamento do cloudflared
+    # derrubaria a publicação sem que nada no repositório tivesse mudado.
+    # Atualizar é uma decisão explícita — trocar esta linha.
+    image: cloudflare/cloudflared:2026.8.2
+    profiles: ["tunnel"]
+    restart: unless-stopped
+    depends_on:
+      - caddy
+    command: tunnel --no-autoupdate run
+    environment:
+      # Credencial do túnel: dá controle sobre ele, ao contrário do ID da zona
+      # ou da conta, que só identificam. Por isso vive em `.env.tunnel`, fora
+      # do Git, e nunca neste arquivo nem no `.env` versionado.
+      #
+      # Sem `:?` de propósito: o Compose interpola TODOS os serviços antes de
+      # filtrar por perfil, então exigir o valor aqui quebraria `npm run up`
+      # numa máquina que nunca vai publicar. Faltando o token, quem reclama é o
+      # próprio cloudflared, e só quando o perfil `tunnel` sobe.
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
+    networks:
+      - astro
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  astro:
+    driver: bridge
+
+volumes:
+  caddy-data:
+  caddy-config:

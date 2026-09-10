@@ -1,0 +1,182 @@
+/* ── Palco do quiz ─────────────────────────────────────────── */
+.quiz {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - var(--nav-h));
+  padding: var(--sp-12) 0 var(--sp-20);
+}
+
+.quiz__inner {
+  position: relative;
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--gutter-desktop);
+}
+
+/* ── Abertura ──────────────────────────────────────────────── */
+.quiz-intro {
+  position: relative;
+  text-align: center;
+}
+
+.quiz-intro__cat {
+  width: min(300px, 70vw);
+  margin: 0 auto var(--sp-6);
+}
+
+.quiz-intro__title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  margin: var(--sp-6) 0 var(--sp-5);
+}
+
+.quiz-intro__body {
+  max-width: 46ch;
+  margin: 0 auto var(--sp-10);
+  color: var(--text-body);
+  font-size: var(--fs-body-lg);
+}
+
+.quiz-intro__form {
+  display: grid;
+  gap: var(--sp-6);
+  max-width: 420px;
+  margin: 0 auto var(--sp-8);
+  text-align: left;
+}
+
+.quiz-intro__facts {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-8);
+  margin-top: var(--sp-12);
+  flex-wrap: wrap;
+}
+
+.quiz-fact {
+  text-align: center;
+}
+
+.quiz-fact__n {
+  font-family: var(--font-display);
+  font-size: var(--fs-title-1);
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.quiz-fact__label {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Pergunta ──────────────────────────────────────────────── */
+.quiz-step__progress {
+  margin-bottom: var(--sp-12);
+}
+
+.quiz-step__answers {
+  margin-top: var(--sp-10);
+}
+
+.quiz-step__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: var(--sp-10);
+}
+
+/* Some do fluxo mas mantém o espaço: sem isto, o botão "Avançar" pula de
+   lugar entre a primeira pergunta e a segunda. */
+.quiz-step__nav > .is-hidden {
+  visibility: hidden;
+}
+
+/* ── Resultado ─────────────────────────────────────────────── */
+.result {
+  position: relative;
+}
+
+.result__hero {
+  text-align: center;
+  margin-bottom: var(--sp-12);
+}
+
+.result__rule {
+  max-width: 220px;
+  margin: var(--sp-5) auto 0;
+}
+
+/* Luna acompanha a leitura da vibração. */
+.result__luna {
+  width: min(340px, 76vw);
+  margin: var(--sp-12) auto var(--sp-4);
+  pointer-events: none;
+}
+
+.result__greeting {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+.result__reading {
+  max-width: 54ch;
+  margin: var(--sp-8) auto 0;
+  color: var(--text-body);
+  font-size: var(--fs-body-lg);
+}
+
+.result__traits {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-8);
+}
+
+.result__bars {
+  display: grid;
+  gap: var(--sp-5);
+  margin-top: var(--sp-12);
+}
+
+.result__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-top: var(--sp-14);
+}
+
+.result__note {
+  margin-top: var(--sp-10);
+  text-align: center;
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+
+/* ── Responsivo ────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .quiz {
+    min-height: calc(100vh - var(--nav-h-mobile));
+    padding: var(--sp-8) 0 var(--sp-14);
+  }
+
+  .quiz__inner { padding: 0 var(--gutter-mobile); }
+
+  .quiz-intro__title { font-size: var(--fs-display-3-sm); }
+
+  .quiz-step__progress { margin-bottom: var(--sp-8); }
+
+  .quiz-step__answers { margin-top: var(--sp-8); }
+
+  .quiz-step__nav { margin-top: var(--sp-8); }
+
+  .quiz-intro__facts { gap: var(--sp-6); }
+}

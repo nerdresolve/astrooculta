@@ -1,0 +1,294 @@
+/* Estilo do app, por cima do design system.
+   Nada aqui inventa cor, medida ou sombra: tudo sai dos tokens. */
+
+/* ── Ponte entre next/font e os tokens ─────────────────────────
+   `tokens/typography.css` nomeia as famílias por string ("Cormorant
+   Garamond", "Cinzel", "Jost"), que é como o design system as carrega via
+   @import do Google Fonts. Aqui elas entram por next/font, que gera um nome
+   próprio e o expõe em --font-cormorant / --font-cinzel / --font-jost.
+   Estas três linhas reapontam os tokens para as fontes já carregadas,
+   mantendo o fallback original. É a única sobrescrita de token do projeto. */
+:root {
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  /* Sem Cinzel carregado (ver layout.tsx): cai para a serifa de display. */
+  --font-ornament: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* ── Correção: barras do resultado do quiz ─────────────────────
+   `.ao-signbar__track` e `__fill` são <span>, que é inline por padrão — e
+   `height` não se aplica a elemento inline. O resultado é que a barra de
+   preenchimento nunca aparecia: via-se só o trilho, com todos os signos
+   parecendo zero.
+
+   A regra vive aqui e não em `astro-oculta-ds/components.css` porque aquele
+   arquivo é cópia fiel do design system e é substituído a cada sincronização.
+   Vale reportar o bug lá também. */
+.ao-signbar__track,
+.ao-signbar__fill {
+  display: block;
+}
+
+/* ── Custo de composição ───────────────────────────────────────
+   O Lighthouse acusou 1971ms em "Style & Layout" na home. A causa são os
+   `backdrop-filter: blur()` dos cards veil: a home tem nove deles (as
+   vibrações), e cada um força o navegador a recompor a região atrás do card.
+
+   `contain: paint` diz ao navegador que nada pintado dentro do card escapa
+   das suas bordas, então ele pode isolar a região e não repintar o resto.
+   Não muda nada visualmente — os cards já têm overflow contido. */
+.ao-card--veil {
+  contain: paint;
+}
+
+/* A camada de estrelas é decorativa e nunca muda depois de pintada: promovê-la
+   a camada própria evita que entre no cálculo de layout das seções. */
+.section__stars,
+.ao-starfield {
+  will-change: opacity;
+}
+
+/* ── Ilustração nos dois temas ─────────────────────────────────
+   Luna e Moonlit são silhuetas em plum/void: no tema cosmic elas se assentam
+   no fundo escuro, mas no lunar o fundo é lavanda clara e a silhueta escura
+   continua legível — é o contraste das próprias referências, onde a gata preta
+   aparece sobre nuvem rosa. O que precisa mudar é só o halo, que no claro
+   ficaria como uma mancha suja. */
+[data-theme="lunar"] .altar__arch,
+[data-theme="lunar"] .closing__cat,
+[data-theme="lunar"] .quote-frame__luna {
+  filter: drop-shadow(0 18px 44px rgba(90, 50, 80, 0.22));
+}
+
+/* ── Estrutura da página ───────────────────────────────────── */
+/* Trava o transbordo horizontal: uma ilustração larga ou um eyebrow que não
+   quebra empurravam a página para os lados no mobile, deixando o conteúdo
+   cortado à direita. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.page__main {
+  flex: 1;
+}
+
+/* Salto para o conteúdo: primeiro item do Tab, invisível até receber foco. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: var(--sp-3);
+  z-index: 100;
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-pill);
+  background: var(--surface-card-solid);
+  border: var(--bw-hair) solid var(--border-hairline);
+  color: var(--text-heading);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+}
+
+.skip-link:focus {
+  left: var(--sp-5);
+}
+
+/* ── Medidas de conteúdo ───────────────────────────────────── */
+.wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter-desktop);
+}
+
+.wrap--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-16) 0 var(--sp-20);
+}
+
+/* Nunca mais de dois tons de fundo por tela: a página e uma faixa alternada. */
+.section--alt {
+  background: var(--surface-page-alt);
+}
+
+.section__inner {
+  position: relative;
+}
+
+/* ── Cabeçalho de página interna ───────────────────────────── */
+.page-head {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-14) 0 var(--sp-12);
+  text-align: center;
+}
+
+.page-head__inner {
+  position: relative;
+}
+
+.page-head__title {
+  font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  margin: var(--sp-5) 0 var(--sp-4);
+}
+
+.page-head__lead {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--text-body);
+  font-size: var(--fs-body-lg);
+}
+
+.page-head .ao-eyebrow {
+  justify-content: center;
+}
+
+/* Palavra em destaque no título: itálico na cor de acento. É a única
+   ênfase tipográfica que a marca usa em headline. */
+.accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+/* ── Grades reaproveitadas ─────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--6 { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--sp-6); }
+
+.stack {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.center {
+  text-align: center;
+}
+
+/* ── Alternador de tema ────────────────────────────────────── */
+.theme-toggle {
+  position: fixed;
+  right: var(--sp-6);
+  bottom: var(--sp-6);
+  z-index: 50;
+  background: var(--surface-veil);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-hairline);
+}
+
+/* ── Rodapé ────────────────────────────────────────────────── */
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: var(--fw-medium);
+  color: var(--text-heading);
+  letter-spacing: var(--ls-tight);
+}
+
+.footer__tagline {
+  max-width: 34ch;
+  font-size: var(--fs-body-sm);
+  color: var(--text-muted);
+}
+
+/* ── Logo da marca ─────────────────────────────────────────────
+   A gata sobre a lua, ao lado do nome. Mora aqui e não no design system:
+   `astro-oculta-ds/` é cópia fiel e a próxima sincronização o sobrescreve.
+
+   `height` fixa e `width:auto` — a arte é quadrada, mas amarrar a altura é o
+   que mantém o logo alinhado ao texto quando a fonte muda de tamanho. */
+.ao-nav__logo,
+.footer__logo {
+  height: 34px;
+  width: auto;
+  /* Sem isto o Image do Next entra como inline e ganha uns 4px de descida
+     debaixo, desalinhando o nome ao lado. */
+  display: block;
+  flex-shrink: 0;
+}
+
+/* O dourado da arte contra o fundo escuro fica um tom apagado ao lado do texto
+   em `--text-heading`. Um brilho curto devolve o contraste sem lavar o preto
+   da gata. No tema claro não é preciso: o fundo já separa. */
+[data-theme="cosmic"] .ao-nav__logo,
+[data-theme="cosmic"] .footer__logo {
+  filter: drop-shadow(0 0 6px rgb(201 168 108 / 0.28));
+}
+
+/* O nome ao lado do logo encolhe antes de quebrar em duas linhas: com o logo
+   ocupando 34px + gap, o cabeçalho ficava apertado entre 900 e 1040px. */
+.ao-nav__brand {
+  gap: var(--sp-2);
+}
+
+.footer__logo {
+  height: 38px;
+}
+
+/* ── Responsivo ────────────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 860px) {
+  .wrap { padding: 0 var(--gutter-mobile); }
+
+  /* O nome cai para 1.375rem aqui (regra do design system) e a barra fica mais
+     baixa: o logo acompanha para não dominar o cabeçalho. */
+  .ao-nav__logo { height: 30px; }
+
+  .footer__logo { height: 34px; }
+
+  .section { padding: var(--sp-12) 0 var(--sp-14); }
+
+  .grid--2,
+  .grid--3 { grid-template-columns: minmax(0, 1fr); }
+
+  .grid--6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .page-head { padding: var(--sp-10) 0 var(--sp-8); }
+
+  .page-head__title { font-size: var(--fs-display-3-sm); }
+
+  .theme-toggle {
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+  }
+}
+
+@media (max-width: 540px) {
+  .grid--4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Telas estreitas de verdade (iPhone SE, 375px). O nome "Astro Oculta" tem
+   `white-space:nowrap` no design system, então não quebra em duas linhas —
+   sem encolher aqui, logo + nome + burger transbordam a barra. */
+@media (max-width: 380px) {
+  .ao-nav__logo { height: 26px; }
+
+  .ao-nav__brand { font-size: 1.1875rem; }
+}

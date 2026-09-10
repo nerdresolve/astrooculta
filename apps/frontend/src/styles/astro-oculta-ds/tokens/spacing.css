@@ -1,0 +1,8 @@
+:root{
+--sp-0:0px;--sp-1:.25rem;--sp-2:.5rem;--sp-3:.75rem;--sp-4:1rem;--sp-5:1.25rem;--sp-6:1.5rem;--sp-7:1.75rem;--sp-8:2rem;--sp-10:2.5rem;--sp-12:3rem;--sp-14:3.5rem;--sp-16:4rem;--sp-20:5rem;--sp-24:6rem;--sp-32:8rem;--sp-40:10rem;
+/* layout */
+--container-max:1200px;--container-narrow:760px;--container-wide:1440px;
+--gutter-desktop:var(--sp-10);--gutter-mobile:var(--sp-5);
+--section-y-desktop:var(--sp-24);--section-y-mobile:var(--sp-14);
+--nav-h:76px;--nav-h-mobile:60px;
+}

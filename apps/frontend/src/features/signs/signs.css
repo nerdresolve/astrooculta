@@ -1,0 +1,117 @@
+.signs__filters {
+  display: flex;
+  justify-content: center;
+}
+
+.signs__grid {
+  margin-top: var(--sp-12);
+}
+
+/* O card inteiro é o link; o sublinhado e a cor de link atrapalhariam. */
+.signs__link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.sign-card {
+  height: 100%;
+  padding: var(--sp-8) var(--sp-6);
+}
+
+.sign-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+.sign-card__element {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sign-card__name {
+  font-size: var(--fs-title-2);
+  margin: var(--sp-5) 0 var(--sp-2);
+}
+
+.sign-card__dates {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+.sign-card__essence {
+  margin: 0;
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+}
+
+/* ── Página de um signo ────────────────────────────────────── */
+.sign-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: var(--sp-12);
+  align-items: start;
+}
+
+.sign-detail__reading {
+  font-size: var(--fs-body-lg);
+  color: var(--text-body);
+}
+
+.sign-detail__facts {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-10);
+  padding-top: var(--sp-8);
+  border-top: var(--bw-hair) solid var(--border-soft);
+}
+
+.sign-fact {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  font-size: var(--fs-body-sm);
+}
+
+.sign-fact__label {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+.sign-detail__traits {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-8);
+}
+
+.sign-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  margin-top: var(--sp-16);
+  padding-top: var(--sp-8);
+  border-top: var(--bw-hair) solid var(--border-soft);
+}
+
+@media (max-width: 860px) {
+  .sign-detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-10);
+  }
+
+  .sign-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

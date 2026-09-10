@@ -1,0 +1,14 @@
+/* Minimal element defaults so consumers inherit brand type + link colours. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg-cosmic);color:var(--text-body);font-family:var(--font-sans);font-size:var(--fs-body);line-height:var(--lh-body);font-weight:var(--fw-light);-webkit-font-smoothing:antialiased}
+body[data-theme="lunar"],[data-theme="lunar"] body{background:var(--bg-lunar)}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-heading);font-weight:var(--fw-regular);letter-spacing:var(--ls-display);margin:0 0 var(--sp-4);text-wrap:pretty}
+h1{font-size:var(--fs-display-2);line-height:var(--lh-display-2)}
+h2{font-size:var(--fs-title-1);line-height:var(--lh-title-1)}
+h3{font-size:var(--fs-title-3);line-height:var(--lh-title-3)}
+p{margin:0 0 var(--sp-4);text-wrap:pretty}
+a{color:var(--text-link);text-decoration:none;transition:var(--t-hover)}
+a:hover{color:var(--text-link-hover)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:none;box-shadow:var(--sh-focus)}
+::selection{background:var(--accent-primary);color:var(--text-on-accent)}
+hr{border:0;height:1px;background:var(--rule-gold);margin:var(--sp-10) 0}

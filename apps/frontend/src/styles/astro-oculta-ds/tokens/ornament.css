@@ -1,0 +1,14 @@
+/* Atmospheric backgrounds, hairline ornaments and notched frames.
+   These are the brand's signature surface treatments. */
+:root{
+--bg-cosmic:radial-gradient(120% 90% at 78% 8%,rgba(82,48,88,.55) 0%,rgba(16,8,16,0) 62%),radial-gradient(80% 70% at 12% 76%,rgba(63,33,69,.42) 0%,rgba(8,5,10,0) 60%),var(--ao-void); /* @kind color */
+--bg-lunar:radial-gradient(110% 80% at 70% 4%,rgba(240,207,221,.85) 0%,rgba(233,219,238,0) 58%),radial-gradient(90% 70% at 8% 90%,rgba(203,177,215,.6) 0%,rgba(243,233,245,0) 62%),linear-gradient(178deg,var(--ao-lav-100) 0%,var(--ao-lav-300) 100%); /* @kind color */
+--bg-starfield:radial-gradient(1.4px 1.4px at 12% 22%,var(--starfield-star),transparent 100%),radial-gradient(1.1px 1.1px at 74% 12%,var(--starfield-star),transparent 100%),radial-gradient(1.6px 1.6px at 88% 62%,var(--starfield-star),transparent 100%),radial-gradient(1px 1px at 32% 78%,var(--starfield-star),transparent 100%),radial-gradient(1.2px 1.2px at 58% 44%,var(--starfield-star),transparent 100%),radial-gradient(1px 1px at 22% 56%,var(--starfield-star),transparent 100%),radial-gradient(1.3px 1.3px at 46% 88%,var(--starfield-star),transparent 100%),radial-gradient(1px 1px at 92% 30%,var(--starfield-star),transparent 100%); /* @kind color */
+--rule-gold:linear-gradient(90deg,transparent,var(--border-hairline-strong) 22%,var(--border-hairline-strong) 78%,transparent); /* @kind other */
+--frame-notch:polygon(var(--notch) 0,calc(100% - var(--notch)) 0,100% var(--notch),100% calc(100% - var(--notch)),calc(100% - var(--notch)) 100%,var(--notch) 100%,0 calc(100% - var(--notch)),0 var(--notch)); /* @kind other */
+--glyph-star:"\2726"; /* @kind other */
+--glyph-star-4:"\2727"; /* @kind other */
+--glyph-moon:"\263D"; /* @kind other */
+--glyph-sun:"\2609"; /* @kind other */
+--glyph-diamond:"\25C7"; /* @kind other */
+}

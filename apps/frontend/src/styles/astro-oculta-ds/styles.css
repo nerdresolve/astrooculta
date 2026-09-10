@@ -1,0 +1,15 @@
+/* Entrada única do design system Astro Oculta.
+   Espelha o `styles.css` do projeto de design, com uma diferença deliberada:
+   `tokens/fonts.css` não entra aqui. Aquele arquivo usa @import do Google Fonts,
+   que bloqueia a renderização; no Next as três famílias são carregadas por
+   `next/font/google` em app/layout.tsx, que faz preload e evita layout shift.
+   Os nomes das famílias continuam idênticos — ver tokens/typography.css. */
+@import url("./tokens/colors.css");
+@import url("./tokens/typography.css");
+@import url("./tokens/spacing.css");
+@import url("./tokens/radii.css");
+@import url("./tokens/shadows.css");
+@import url("./tokens/motion.css");
+@import url("./tokens/ornament.css");
+@import url("./tokens/base.css");
+@import url("./components.css");

@@ -1,0 +1,29 @@
+.about__lead {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body-lg);
+  color: var(--text-body);
+}
+
+.about__lead + .about__lead {
+  margin-top: var(--sp-6);
+}
+
+.about__principles {
+  margin-top: var(--sp-12);
+}
+
+.principle {
+  height: 100%;
+  padding: var(--sp-8);
+}
+
+.principle__title {
+  font-size: var(--fs-title-3);
+  margin: var(--sp-5) 0 var(--sp-3);
+}
+
+.principle__body {
+  margin: 0;
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+}

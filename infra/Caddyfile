@@ -1,0 +1,56 @@
+# Astro Oculta — borda.
+#
+# SITE_ADDRESS decide o modo de operação:
+#   :80                  → HTTP puro, sem certificado. Usado em dois casos:
+#                          desenvolvimento local E atrás do túnel Cloudflare,
+#                          onde o TLS público termina na borda da Cloudflare.
+#   dominio.exemplo.com  → HTTPS automático via Let's Encrypt, para quando a
+#                          máquina estiver exposta direto na internet.
+# Ver infra/.env, infra/.env.local e infra/.env.tunnel.
+{
+	# Endereço para onde o Let's Encrypt manda aviso de expiração. Só é usado
+	# quando SITE_ADDRESS é um domínio de verdade.
+	email {$ACME_EMAIL:ola@nerdresolve.com}
+
+	# Menos ruído no log: uma linha por requisição, em JSON.
+	log {
+		format json
+	}
+
+	# Confia nos cabeçalhos de encaminhamento vindos das redes privadas —
+	# é de lá que o cloudflared fala com o Caddy. Sem isto, `{scheme}` e o IP
+	# do cliente refletiriam o container do túnel, não o visitante real.
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+{$SITE_ADDRESS} {
+	encode zstd gzip
+
+	header {
+		# HSTS só faz sentido sob HTTPS; em :80 o Caddy ignora. Atrás do túnel
+		# quem serve HTTPS é a Cloudflare, e o cabeçalho segue válido porque o
+		# navegador vê a resposta pela borda dela.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# O site não usa geolocalização, câmera nem microfone.
+		Permissions-Policy "geolocation=(), camera=(), microphone=()"
+		# Assinatura do servidor não ajuda ninguém além de quem procura alvo.
+		-Server
+	}
+
+	# Os assets com hash no nome são imutáveis: cacheiam por um ano. O resto
+	# das rotas é HTML, que precisa ser revalidado a cada visita.
+	@immutable path /_next/static/* /brand/* /fonts/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	# O `reverse_proxy` já repassa X-Forwarded-Proto, X-Forwarded-For e
+	# X-Forwarded-Host por conta própria — declarar `header_up` para eles é
+	# redundante e o Caddy avisa. Com `trusted_proxies` acima, os valores que
+	# chegam do cloudflared (proto https, IP real do visitante) são
+	# preservados em vez de sobrescritos pelo salto interno.
+	reverse_proxy {$UPSTREAM}
+}

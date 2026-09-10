@@ -1,0 +1,83 @@
+.post-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-10);
+  align-items: center;
+  margin-bottom: var(--sp-16);
+  padding: var(--sp-12);
+}
+
+.post-lead__body {
+  max-width: 56ch;
+}
+
+.post-lead__art {
+  width: 168px;
+}
+
+.post-lead__title {
+  font-size: var(--fs-display-3);
+  line-height: var(--lh-display-3);
+  margin: var(--sp-5) 0 var(--sp-4);
+}
+
+.post-lead__excerpt {
+  margin: 0 0 var(--sp-6);
+  font-size: var(--fs-body-lg);
+  color: var(--text-body);
+}
+
+.post-lead__meta,
+.post-item__meta {
+  margin: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.blog__grid {
+  margin-top: var(--sp-12);
+}
+
+.post-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  height: 100%;
+  padding: var(--sp-8);
+}
+
+.post-item__title {
+  font-size: var(--fs-title-3);
+  line-height: 1.28;
+  margin: 0;
+}
+
+.post-item__excerpt {
+  margin: 0;
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+}
+
+.post-item__meta {
+  margin-top: auto;
+}
+
+@media (max-width: 860px) {
+  /* Coluna única: a arte vai para o topo, senão espreme o texto. */
+  .post-lead {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-12);
+    padding: var(--sp-8);
+  }
+
+  .post-lead__art {
+    order: -1;
+    width: 132px;
+    margin: 0 auto;
+  }
+
+  .post-lead__title { font-size: var(--fs-display-3-sm); }
+}

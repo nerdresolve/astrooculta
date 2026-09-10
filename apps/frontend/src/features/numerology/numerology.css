@@ -1,0 +1,53 @@
+.vibrations {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-5);
+  margin-top: var(--sp-12);
+}
+
+.vibration-card {
+  padding: var(--sp-8);
+}
+
+.vibration-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-5);
+}
+
+/* Numeral em serifa dourada a 55% — é como o design system trata número. */
+.vibration-card__n {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-2);
+  line-height: 1;
+  color: var(--accent-gold);
+  opacity: 0.55;
+}
+
+.vibration-card__name {
+  font-size: var(--fs-title-2);
+  margin: 0 0 var(--sp-1);
+}
+
+.vibration-card__keywords {
+  margin: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+.vibration-card__detail {
+  margin: var(--sp-6) 0 0;
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+}
+
+@media (max-width: 860px) {
+  .vibrations {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: var(--sp-10);
+  }
+
+  .vibration-card__n { font-size: var(--fs-display-3); }
+}

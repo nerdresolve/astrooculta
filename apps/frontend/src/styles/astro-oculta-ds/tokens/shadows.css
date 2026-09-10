@@ -1,0 +1,15 @@
+:root{
+--sh-none:none; /* @kind shadow */
+--sh-soft:0 2px 10px rgba(8,5,10,.35);
+--sh-card:0 10px 34px rgba(8,5,10,.45);
+--sh-raised:0 18px 60px rgba(8,5,10,.55);
+--sh-glow-accent:0 0 32px var(--glow-accent);
+--sh-glow-gold:0 0 26px var(--glow-gold);
+--sh-inset-hair:inset 0 0 0 1px var(--border-hairline);
+--sh-focus:0 0 0 2px var(--surface-page),0 0 0 4px var(--border-focus);
+}
+[data-theme="lunar"]{
+--sh-soft:0 2px 10px rgba(90,50,80,.10);
+--sh-card:0 10px 30px rgba(90,50,80,.14);
+--sh-raised:0 20px 50px rgba(90,50,80,.18);
+}

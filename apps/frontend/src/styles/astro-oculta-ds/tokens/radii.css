@@ -1,0 +1,10 @@
+:root{
+--r-xs:4px;--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-pill:999px;
+--r-card:16px;--r-input:var(--r-pill);--r-button:var(--r-pill);--r-arch:50% 50% 8px 8px / 34% 34% 8px 8px; /* @kind radius */
+/* hairline widths */
+--bw-hair:1px; /* @kind spacing */
+--bw-frame:1.5px; /* @kind spacing */
+--bw-focus:2px; /* @kind spacing */
+/* ornamental corner notch used by framed panels */
+--notch:14px; /* @kind spacing */
+}

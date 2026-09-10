@@ -1,0 +1,88 @@
+:root{
+/* ── Base palette · cosmic ink ─────────────────────────────── */
+--ao-void:#08050a;--ao-plum-900:#100810;--ao-plum-800:#180d19;--ao-plum-700:#241228;--ao-plum-600:#2f1834;--ao-plum-500:#3f2145;--ao-plum-400:#523058;
+/* ── Base palette · lunar lavender ─────────────────────────── */
+--ao-lav-50:#faf5fb;--ao-lav-100:#f3e9f5;--ao-lav-200:#e9dbee;--ao-lav-300:#dcc8e4;--ao-lav-400:#cbb1d7;--ao-lav-500:#b393c6;--ao-lav-600:#9573ac;--ao-lav-700:#74558a;
+/* ── Base palette · amethyst accent ────────────────────────── */
+--ao-amethyst-200:#e0d0f2;--ao-amethyst-300:#cbb2e8;--ao-amethyst-400:#c2a3e2;--ao-amethyst-500:#a983d1;--ao-amethyst-600:#8d64b4;
+/* ── Base palette · dusty rose ─────────────────────────────── */
+--ao-rose-200:#f0cfdd;--ao-rose-300:#dda9bf;--ao-rose-400:#c98fa6;--ao-rose-500:#b3778f;--ao-rose-600:#9d5c78;
+/* ── Base palette · gold & champagne ───────────────────────── */
+--ao-gold-200:#f0dfc2;--ao-gold-300:#e3c99a;--ao-gold-400:#c9a86c;--ao-gold-500:#a9834a;--ao-gold-600:#8f7343;--ao-gold-700:#5e4a2b;
+/* ── Base palette · cream & warm neutral ───────────────────── */
+--ao-cream-50:#fdf9f4;--ao-cream-100:#f4ebe1;--ao-cream-200:#e6d8cc;--ao-warm-400:#cbbcc2;--ao-warm-500:#a99aa2;--ao-warm-600:#7d6d78;--ao-ink-700:#4a2f3f;--ao-ink-800:#2b1420;--ao-ink-900:#1a0c14;
+/* ── Semantic · status ─────────────────────────────────────── */
+--ao-success:#8fae8b;--ao-warning:#c9a86c;--ao-danger:#c2717a;--ao-info:#9db4c9;
+
+/* ═══ SEMANTIC ROLES — default theme: Cosmic (dark) ═════════ */
+--surface-page:var(--ao-void);
+--surface-page-alt:var(--ao-plum-900);
+--surface-card:rgba(36,18,40,.72);
+--surface-card-solid:var(--ao-plum-800);
+--surface-raised:var(--ao-plum-700);
+--surface-inset:rgba(8,5,10,.55);
+--surface-veil:rgba(8,5,10,.72);
+
+--text-display:var(--ao-cream-100);
+--text-heading:var(--ao-cream-100);
+--text-body:var(--ao-warm-400);
+--text-muted:var(--ao-warm-500);
+--text-accent:var(--ao-amethyst-300);
+--text-eyebrow:var(--ao-gold-400);
+--text-on-accent:var(--ao-plum-900);
+--text-link:var(--ao-amethyst-300);
+--text-link-hover:var(--ao-cream-100);
+
+--accent-primary:var(--ao-amethyst-400);
+--accent-primary-hover:var(--ao-amethyst-300);
+--accent-primary-press:var(--ao-amethyst-500);
+--accent-secondary:var(--ao-rose-400);
+--accent-gold:var(--ao-gold-400);
+
+--border-hairline:rgba(201,168,108,.28);
+--border-hairline-strong:rgba(201,168,108,.55);
+--border-soft:rgba(224,208,242,.14);
+--border-focus:var(--ao-amethyst-300);
+
+--glow-accent:rgba(194,163,226,.28);
+--glow-gold:rgba(201,168,108,.22);
+--starfield-star:rgba(240,223,194,.85);
+--starfield-haze:rgba(82,48,88,.55);
+}
+
+/* ═══ Lunar (light) theme ═══════════════════════════════════ */
+[data-theme="lunar"]{
+--surface-page:var(--ao-lav-200);
+--surface-page-alt:var(--ao-lav-100);
+--surface-card:rgba(253,249,244,.66);
+--surface-card-solid:var(--ao-lav-50);
+--surface-raised:#ffffff;
+--surface-inset:rgba(219,200,228,.45);
+--surface-veil:rgba(243,233,245,.78);
+
+--text-display:var(--ao-ink-800);
+--text-heading:var(--ao-ink-800);
+--text-body:var(--ao-ink-700);
+--text-muted:var(--ao-warm-600);
+--text-accent:var(--ao-rose-500);
+--text-eyebrow:var(--ao-gold-500);
+--text-on-accent:var(--ao-cream-100);
+--text-link:var(--ao-rose-600);
+--text-link-hover:var(--ao-ink-800);
+
+--accent-primary:var(--ao-plum-800);
+--accent-primary-hover:var(--ao-plum-600);
+--accent-primary-press:var(--ao-ink-900);
+--accent-secondary:var(--ao-rose-400);
+--accent-gold:var(--ao-gold-500);
+
+--border-hairline:rgba(169,131,74,.34);
+--border-hairline-strong:rgba(169,131,74,.6);
+--border-soft:rgba(116,85,138,.16);
+--border-focus:var(--ao-rose-500);
+
+--glow-accent:rgba(179,119,143,.22);
+--glow-gold:rgba(169,131,74,.2);
+--starfield-star:rgba(169,131,74,.7);
+--starfield-haze:rgba(240,207,221,.7);
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@astro-oculta/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test \"src/**/*.test.ts\"",
+    "art": "node tools/build-brand-art.mjs",
+    "logo": "node tools/build-logo.mjs",
+    "shots": "python tools/shot.py"
+  },
+  "dependencies": {
+    "next": "15.5.23",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@types/node": "22.15.0",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.0",
+    "eslint": "9.19.0",
+    "eslint-config-next": "15.5.23",
+    "typescript": "5.7.3"
+  },
+  "comments": {
+    "no-tailwind": "O design system é CSS puro com tokens em custom properties. Tailwind brigaria com ele — ver src/styles/astro-oculta-ds/.",
+    "test": "A lógica do quiz (apuração numerológica) é testada sem rede e sem dependência instalada."
+  }
+}

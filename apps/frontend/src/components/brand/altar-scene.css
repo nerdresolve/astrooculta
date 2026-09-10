@@ -1,0 +1,48 @@
+/* Cena do altar. Tudo é posicionado em % sobre um contêiner de proporção fixa,
+   então a composição inteira escala junto e nunca se desmonta. */
+.altar {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1.02;
+}
+
+.altar__arch {
+  position: absolute;
+  inset: 0 0 6% 0;
+  width: 100%;
+  height: 94%;
+  filter: drop-shadow(0 24px 60px rgba(8, 5, 10, 0.55));
+}
+
+/* A arte já inclui os objetos do altar ao redor da gata, então ela ocupa boa
+   parte da largura do arco — antes eram 34% porque havia SVGs nas laterais. */
+.altar__cat {
+  position: absolute;
+  left: 50%;
+  bottom: 7%;
+  width: 76%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.altar__surface {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 6%;
+  width: 104%;
+  height: 24px;
+  z-index: 2;
+}
+
+@media (max-width: 860px) {
+  .altar {
+    max-width: 420px;
+  }
+
+  .altar__cat {
+    width: 82%;
+  }
+}

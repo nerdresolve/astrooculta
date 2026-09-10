@@ -1,0 +1,415 @@
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--sp-24);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: var(--sp-12);
+  align-items: center;
+  padding-top: var(--sp-12);
+}
+
+/* Nas referências o título domina a tela. `clamp` deixa ele grande no desktop
+   sem estourar em telas médias — o token sozinho era pequeno demais. */
+.hero__title {
+  position: relative;
+  font-size: clamp(2.75rem, 5.4vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: var(--sp-6) 0;
+}
+
+.hero__title-star {
+  position: absolute;
+  margin-left: var(--sp-3);
+  transform: translateY(-0.6em);
+  animation: ao-twinkle 3.6s var(--ease-in-out) infinite;
+}
+
+.hero__body {
+  max-width: 38ch;
+  font-size: var(--fs-body-lg);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.hero__actions {
+  margin: var(--sp-8) 0 var(--sp-6);
+}
+
+/* `min-width: 0` é o que permite a coluna encolher abaixo do tamanho natural
+   da ilustração; sem ele o grid estoura a largura da página no mobile. */
+.hero__art {
+  position: relative;
+  min-width: 0;
+}
+
+.hero__copy {
+  min-width: 0;
+}
+
+/* Faixa de nuvem entre seções — a névoa das referências. */
+.cloud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cloud--bottom { bottom: -1px; }
+.cloud--top { top: -1px; }
+
+/* Camada de estrelas: fica atrás do conteúdo de cada seção. */
+.section__stars {
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.section__cta {
+  margin-top: var(--sp-12);
+}
+
+/* ── Como funciona ─────────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-8);
+  margin-top: var(--sp-14);
+}
+
+/* Cada passo é um painel emoldurado, não texto solto sobre o fundo. */
+.step {
+  position: relative;
+  padding: var(--sp-10) var(--sp-6) var(--sp-8);
+  text-align: center;
+  border: var(--bw-hair) solid var(--border-hairline);
+  border-radius: var(--r-xs);
+  background: var(--surface-card);
+  box-shadow: var(--sh-soft), inset 0 0 0 3px var(--surface-page-alt), inset 0 0 0 4px var(--border-hairline);
+}
+
+.step__badge {
+  position: absolute;
+  top: calc(var(--sp-4) * -1);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.step__art {
+  width: 108px;
+  margin: 0 auto var(--sp-6);
+}
+
+.step__title {
+  font-size: var(--fs-title-3);
+  margin: 0 0 var(--sp-3);
+}
+
+.step__body {
+  max-width: 30ch;
+  margin: 0 auto;
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+}
+
+/* ── Citação, com Luna ─────────────────────────────────────── */
+.quote-section {
+  padding-bottom: var(--sp-24);
+}
+
+/* `overflow: hidden` cortava a Luna pela cabeça e pelos pés. Agora ela cabe
+   inteira: a moldura tem altura mínima e ela se alinha pela base, com folga. */
+.quote-frame {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(200px, 30%) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--sp-8);
+  min-height: 340px;
+  padding: var(--sp-12) var(--sp-12) var(--sp-12) var(--sp-10);
+  background: linear-gradient(120deg, var(--ao-plum-800), var(--surface-page-alt) 62%);
+  border-radius: var(--r-sm);
+  box-shadow: inset 0 0 0 1px var(--border-hairline-strong), var(--sh-card);
+}
+
+[data-theme="lunar"] .quote-frame {
+  background: linear-gradient(120deg, var(--ao-lav-300), var(--surface-page-alt) 62%);
+}
+
+.quote-frame__corner {
+  position: absolute;
+  width: 54px;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+.quote-frame__corner--tl { top: 10px; left: 10px; }
+.quote-frame__corner--tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.quote-frame__corner--bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+.quote-frame__corner--br { bottom: 10px; right: 10px; transform: scale(-1); }
+
+/* Luna ocupa a primeira coluna do grid, inteira e sem corte. */
+.quote-frame__luna {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 260px;
+  justify-self: center;
+}
+
+.quote {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+}
+
+.quote__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.75rem);
+  line-height: 1.26;
+  color: var(--text-display);
+}
+
+.quote__rule {
+  max-width: 260px;
+  margin: var(--sp-8) auto 0;
+}
+
+/* ── Pilares ───────────────────────────────────────────────── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-6);
+  margin-top: var(--sp-14);
+}
+
+.pillar {
+  text-align: center;
+}
+
+/* Anel em volta do glifo: sem ele o ícone flutua sem peso. */
+.pillar__ring {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto var(--sp-4);
+  border: var(--bw-hair) solid var(--border-hairline);
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 3px var(--surface-page), inset 0 0 0 4px var(--border-soft);
+  transition: var(--t-hover);
+}
+
+.pillar:hover .pillar__ring {
+  border-color: var(--border-hairline-strong);
+  box-shadow: inset 0 0 0 3px var(--surface-page), inset 0 0 0 4px var(--border-hairline), var(--sh-glow-gold);
+}
+
+.pillar__label {
+  margin: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+  color: var(--text-body);
+}
+
+/* ── Signos ────────────────────────────────────────────────── */
+.signs-preview {
+  margin-top: var(--sp-12);
+}
+
+.sign-tile {
+  padding: var(--sp-8) var(--sp-5);
+}
+
+.sign-tile__name {
+  font-size: var(--fs-title-3);
+  margin: var(--sp-4) 0 var(--sp-2);
+}
+
+.sign-tile__dates {
+  margin: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+/* ── Numerologia ───────────────────────────────────────────── */
+.numerology-section {
+  position: relative;
+}
+
+.vibrations-preview {
+  margin-top: var(--sp-12);
+}
+
+.numerology-section__crystals {
+  position: absolute;
+  right: 2%;
+  bottom: var(--sp-8);
+  width: 120px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.vibration {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+}
+
+.vibration__n {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-3);
+  line-height: 1;
+  color: var(--accent-gold);
+  opacity: 0.55;
+}
+
+/* ── Blog ──────────────────────────────────────────────────── */
+.posts-preview {
+  margin-top: var(--sp-12);
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  height: 100%;
+}
+
+.post__title {
+  font-size: var(--fs-title-3);
+  line-height: 1.28;
+  margin: 0;
+}
+
+.post__meta {
+  margin: auto 0 0;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Chamada final ─────────────────────────────────────────── */
+.closing-section {
+  padding-top: var(--sp-24);
+}
+
+.closing {
+  position: relative;
+  text-align: center;
+}
+
+.closing__cat {
+  width: min(280px, 68vw);
+  margin: 0 auto var(--sp-6);
+}
+
+.closing__title {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.14;
+  margin: var(--sp-5) 0;
+}
+
+.closing__body {
+  max-width: 46ch;
+  margin: 0 auto var(--sp-10);
+  color: var(--text-body);
+}
+
+.closing__candle {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  width: 52px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ── Responsivo ────────────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .steps { gap: var(--sp-5); }
+
+  .pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .quote-frame {
+    grid-template-columns: minmax(170px, 32%) minmax(0, 1fr);
+    gap: var(--sp-6);
+    padding: var(--sp-10) var(--sp-8);
+  }
+}
+
+@media (max-width: 860px) {
+  /* O mobile é desenhado, não empilhado: a ilustração desce para depois do
+     CTA e da linha de confiança, como manda o design system. */
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-10);
+    padding-top: var(--sp-6);
+    text-align: center;
+  }
+
+  /* O eyebrow tem três termos longos e não cabe em 390px numa linha só:
+     tracking menor e quebra centralizada resolvem sem cortar palavra. */
+  .hero__copy .ao-eyebrow {
+    justify-content: center;
+    gap: var(--sp-2);
+    letter-spacing: 0.12em;
+    font-size: var(--fs-micro);
+  }
+
+  .hero__art { order: 2; }
+
+  .hero__title { margin: var(--sp-5) 0; }
+
+  .hero__body {
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-10);
+    margin-top: var(--sp-12);
+  }
+
+  /* Luna vira topo da citação: em coluna única, lado a lado não cabe. */
+  .quote-frame {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    gap: var(--sp-4);
+    padding: var(--sp-10) var(--sp-6) var(--sp-12);
+    text-align: center;
+  }
+
+  .quote-frame__luna {
+    width: 168px;
+    margin: 0 auto;
+  }
+
+  .quote-frame__corner { width: 38px; }
+
+  .pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-8);
+  }
+
+  .numerology-section__crystals { display: none; }
+
+  .closing__candle { display: none; }
+
+  .closing__cat { width: 104px; }
+}

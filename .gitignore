@@ -1,0 +1,39 @@
+# Dependências e build — tudo regenerado por `npm install` / `npm run build`.
+node_modules/
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Segredos
+#
+# NENHUM `.env` entra no repositório. Este repo é público: segredo versionado é
+# segredo vazado, e quem clona leva junto o token que publica o site.
+#
+# Os `.example` são o modelo — copie, preencha e mantenha o original fora daqui.
+.env
+.env.*
+infra/.env
+infra/.env.local
+infra/.env.tunnel
+
+# ...menos os modelos, que precisam ser versionados.
+!.env.example
+!infra/.env.example
+!infra/.env.local.example
+!infra/.env.tunnel.example
+
+# Arte original: PNGs de ~2 MB que `npm run art` e `npm run logo` convertem
+# para o que o site serve. O resultado (public/brand, ícones) é versionado.
+apps/frontend/src/assets/
+
+# Saída de ferramentas
+apps/frontend/shots/
+*.log
+
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
