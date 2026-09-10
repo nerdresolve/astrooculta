@@ -6,8 +6,8 @@ Este repositório é público para **avaliação técnica e demonstração de
 portfólio**. O código pode ser lido, estudado e citado com atribuição.
 
 Não é concedida licença para usar, copiar, modificar, distribuir ou explorar
-este software, no todo ou em parte, para qualquer finalidade — comercial ou
-não — sem autorização por escrito.
+este software, no todo ou em parte, para qualquer finalidade,
+comercial ou não, sem autorização por escrito.
 
 ## O que isso quer dizer na prática
 
@@ -25,7 +25,7 @@ Não pode:
 
 ## Marca e conteúdo
 
-A identidade visual da **Astro Oculta** — logo, arte e textos — pertence à
+A identidade visual da **Astro Oculta** (logo, arte e textos) pertence à
 titular da marca e **não** está coberta por nenhuma permissão acima. Os
 textos dos signos, as perguntas do quiz e as ilustrações são material
 autoral do projeto.

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/brand/banner.svg" alt="Astro Oculta — quiz de personalidade com astrologia e numerologia" width="100%">
+<img src="docs/brand/banner.svg" alt="Astro Oculta: quiz de personalidade com astrologia e numerologia" width="100%">
 
 Um quiz de personalidade que não pergunta a sua data de nascimento.
 Nove perguntas de numerologia, e no fim o signo que combina com as suas escolhas.
@@ -17,8 +17,8 @@ Nove perguntas de numerologia, e no fim o signo que combina com as suas escolhas
 
 Um site completo de astrologia, numerologia e tarô, construído para uma
 taróloga. O centro é um **quiz de personalidade**: nove perguntas, uma por
-vibração numerológica, doze alternativas cada — uma por signo, escondidas de
-quem responde.
+vibração numerológica, com doze alternativas cada. Cada alternativa pertence a
+um signo, e o visitante nunca vê a qual.
 
 O resultado traz o signo dominante, o percentual de cada um dos doze e uma
 leitura escrita. Sem login, sem cadastro, sem banco de dados: o resultado
@@ -52,7 +52,7 @@ fecha a conta: nove respostas divididas em nove signos dariam 11% × 9 = 99%.
 A apuração usa o método do maior resto, e há teste para isso.
 
 **As alternativas são embaralhadas com semente fixa.** Elas nascem na ordem
-zodiacal, e exibi-las assim entregaria o jogo — a primeira opção seria sempre
+zodiacal, e exibi-las assim entregaria o jogo: a primeira opção seria sempre
 Áries. Embaralhar com `Math.random()` quebraria a hidratação, porque servidor
 e cliente sorteariam ordens diferentes. A semente é o índice da pergunta.
 
@@ -103,7 +103,7 @@ antes da primeira pintura, para a página não piscar.
 </table>
 
 > Não são mockups: é o site rodando. `npm run shots` abre cada rota no
-> Chromium, em 1440×900 e 390×844, e salva duas versões — a página inteira e
+> Chromium, em 1440×900 e 390×844, e salva duas versões: a página inteira e
 > este recorte do topo, todos na mesma proporção para a grade não abrir buraco.
 > **Clique em qualquer imagem** para ver a página completa.
 
@@ -114,7 +114,7 @@ antes da primeira pintura, para a página não piscar.
 ```
 apps/frontend/
   src/
-    app/                    rotas (App Router) — cada página é um page.tsx fino
+    app/                    rotas (App Router). Cada página é um page.tsx fino
       quiz/resultado/       resultado lido da URL, compartilhável
       signos/[sign]/        doze rotas geradas em build
       api/health/           sonda do healthcheck do compose
@@ -123,7 +123,7 @@ apps/frontend/
       brand/                logo e arte da marca
     content/                signos, vibrações, perguntas, textos do site
     features/               uma pasta por tela: view + css
-    lib/quiz/               apuração do quiz — regra pura, testada
+    lib/quiz/               apuração do quiz: regra pura, testada
     styles/astro-oculta-ds/ design system, cópia fiel (não editar)
 infra/                      Dockerfile, compose, Caddyfile
 docs/telas/                 as capturas deste README
@@ -131,7 +131,7 @@ docs/telas/                 as capturas deste README
 
 As páginas em `app/` só delegam; a tela mora em `features/*-view.tsx`. O que é
 interativo (`"use client"`) fica restrito ao quiz, ao filtro de signos, ao
-formulário de contato e à moldura — todo o resto é server component.
+formulário de contato e à moldura. Todo o resto é server component.
 
 ### Escolhas de arquitetura
 
@@ -179,7 +179,7 @@ npm run up:prod                                # portas 80/443, HTTPS automátic
 ### Publicar por túnel Cloudflare
 
 Sem IP público nem porta aberta. Exige `infra/.env.tunnel` com o token do
-túnel — o arquivo fica fora do Git.
+túnel. O arquivo fica fora do Git.
 
 ```bash
 cp infra/.env.tunnel.example infra/.env.tunnel  # cole o TUNNEL_TOKEN
@@ -208,17 +208,17 @@ Nenhum `.env` entra no repositório. Os `.example` são o modelo.
 |---|---|
 | `infra/.env` | Produção: domínio, e-mail do ACME, portas |
 | `infra/.env.local` | Máquina local: sobrepõe o de cima com `:80` |
-| `infra/.env.tunnel` | Token do túnel Cloudflare — **segredo** |
+| `infra/.env.tunnel` | Token do túnel Cloudflare. **É segredo** |
 
 Contato e redes sociais entram no build por `NEXT_PUBLIC_*`. Sem eles o site
-sobe com valores de exemplo e funciona igual — é o que este repositório
+sobe com valores de exemplo e funciona igual. É o que este repositório
 mostra, já que o telefone real é de uma pessoa.
 
 ---
 
 ## Pendências conhecidas
 
-- **O formulário de contato não envia.** Valida, dá retorno e para aí — não há
+- **O formulário de contato não envia.** Valida, dá retorno e para aí. Não há
   backend. O ponto de envio está isolado e comentado em
   `features/contact/contact-view.tsx`.
 - **Blog sem páginas de post.** A listagem usa os quatro textos de
@@ -227,7 +227,7 @@ mostra, já que o telefone real é de uma pessoa.
   licenciadas do design original.
 - **`sharp` com aviso de segurança** (`npm audit`): é dependência transitiva do
   Next para otimização de imagem. A correção sugerida força o Next 16, uma
-  quebra de major — fica para uma atualização deliberada.
+  quebra de major, e fica para uma atualização deliberada.
 
 ---
 
@@ -246,7 +246,7 @@ titular.
 
 <img src="apps/frontend/public/brand/logo.webp" alt="" width="42">
 
-**Astro Oculta** — desenvolvido por [NerdResolve](https://nerdresolve.com)
+**Astro Oculta**, desenvolvido por [NerdResolve](https://nerdresolve.com)
 
 Quer um site assim? **contact@nerdresolve.com**
 
